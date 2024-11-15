@@ -1,0 +1,130 @@
+html{
+    overflow-x: hidden;
+}
+
+.containerh {
+    margin: 0;
+    background-color: white;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    padding-top: 0rem;
+    min-height: 90vh;  
+    height:fit-content;
+}
+
+.filter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.filter h3{
+    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.filter-menu{
+    display: flex;
+    gap: 50px;
+    margin-top: 10px;
+
+}
+
+.filter-item img{
+    height: 120px;
+    width: auto;
+    cursor: pointer;
+
+}
+
+
+.first{
+    margin-top: 50px;
+}
+.row{
+    display: flex;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 100px;
+    gap: 30px;
+}
+
+.card{
+    background-color: #e3f6fc;
+    border-radius: 10px;
+    padding: 10px 20px 10px 20px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.title h1{
+    font-size: 30px;
+    font-weight: 600;
+    margin-left: 120px;
+    margin-top: 30px;
+    height: 20px;
+}
+
+.card-title{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.card-title img{
+    height: 50px;
+    width: auto;
+}
+
+.card-title h1{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.car-image{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    height: 250px; 
+}
+.car-image img{
+    width: 400px;
+    height: auto;
+}
+
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-footer p{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+.button-primary{
+    background-color: #4d8cf0;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    border: 0px;
+}
+
+.button-primary:hover{
+    background-color: #699ff5;
+    cursor: pointer;
+}
+
+.small-text{
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+}

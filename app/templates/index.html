@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet">
+</head>
+<body>
+    {% include('sidebar.html') %}
+    <div class="containerh">
+        <div class="filter">
+            <h3>Filter By Brand</h3>
+            <div class="filter-menu">
+                <div class="filter-item"><img src="{{ url_for('static', filename='images/logos/Ferrari.png') }}" alt="Ferrari Logo"></div>
+                <div class="filter-item"><img src="{{ url_for('static', filename='images/logos/McLaren.png') }}" alt="McLaren Logo"></div>
+                <div class="filter-item"><img src="{{ url_for('static', filename='images/logos/Porsche.png') }}" alt="Porsche Logo"></div>
+                <div class="filter-item"><img src="{{ url_for('static', filename='images/logos/Tesla.png') }}" alt="Tesla Logo"></div>
+                <div class="filter-item"><img src="{{ url_for('static', filename='images/logos/RollsRoyce.png') }}" alt="Rolls Royce Logo"></div>
+                <div class="filter-item"><img src="{{ url_for('static', filename='images/logos/BMW.png') }}" alt="BMW Logo"></div>
+                <div class="filter-item"><img src="{{ url_for('static', filename='images/logos/Mercedes.png') }}" alt="Mercedes Logo"></div>
+            </div>
+        </div>
+        <div class="title">
+            <h1>🔥 Popular Cars</h1>
+        </div>
+
+        <div class="first row">
+            <div class="card">
+                <div class="card-title">
+                    <img src="{{ url_for('static', filename='images/logos/Porsche.png') }}" alt="Porsche Logo"><h1>2022 Porsche Turbo s </h1>
+                </div>
+                <div class="car-image">
+                <img src="{{ url_for('static', filename='images/cars/Turbos2.png') }}" alt="Porsche Logo">
+                </div>
+                <div class="card-footer">
+                    <p>$ 680<span class="small-text"> / Day</span></p>
+                    <button class="button-primary">View Details</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <img src="{{ url_for('static', filename='images/logos/McLaren.png') }}" alt="McLaren Logo"><h1>2022 McLaren 765LT Spider</h1>
+                </div>
+                <div class="car-image">
+                <img src="{{ url_for('static', filename='images/cars/McLaren765ltspider.png') }}" alt="Porsche Logo">
+                </div>
+                <div class="card-footer">
+                    <p>$ 680<span class="small-text"> / Day</span></p>
+                    <button class="button-primary">View Details</button>
+                </div>                
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <img src="{{ url_for('static', filename='images/logos/Mercedes.png') }}" alt="Mercedes Logo"><h1>2024 Mercedes E350</h1>
+                </div>
+                <div class="car-image">
+                <img src="{{ url_for('static', filename='images/cars/MercedesE350.png') }}" alt="Porsche Logo">
+                </div>
+                <div class="card-footer">
+                    <p>$ 680<span class="small-text"> / Day</span></p>
+                    <button class="button-primary">View Details</button>
+                </div>                
+            </div>                       
+        </div>
+        <div class="title">
+            <h1>🔥 Regular Cars</h1>
+        </div>
+
+        <div class="first row">
+            <div class="card">
+                <div class="card-title">
+                    <img src="{{ url_for('static', filename='images/logos/Porsche.png') }}" alt="Porsche Logo"><h1>2022 Porsche Turbo s </h1>
+                </div>
+                <div class="car-image">
+                <img src="{{ url_for('static', filename='images/cars/Turbos2.png') }}" alt="Porsche Logo">
+                </div>
+                <div class="card-footer">
+                    <p>$ 680<span class="small-text"> / Day</span></p>
+                    <button class="button-primary">View Details</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <img src="{{ url_for('static', filename='images/logos/McLaren.png') }}" alt="McLaren Logo"><h1>2022 McLaren 765LT Spider</h1>
+                </div>
+                <div class="car-image">
+                <img src="{{ url_for('static', filename='images/cars/McLaren765ltspider.png') }}" alt="Porsche Logo">
+                </div>
+                <div class="card-footer">
+                    <p>$ 680<span class="small-text"> / Day</span></p>
+                    <button class="button-primary">View Details</button>
+                </div>                
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <img src="{{ url_for('static', filename='images/logos/Mercedes.png') }}" alt="Mercedes Logo"><h1>2024 Mercedes E350</h1>
+                </div>
+                <div class="car-image">
+                <img src="{{ url_for('static', filename='images/cars/MercedesE350.png') }}" alt="Porsche Logo">
+                </div>
+                <div class="card-footer">
+                    <p>$ 680<span class="small-text"> / Day</span></p>
+                    <button class="button-primary">View Details</button>
+                </div>                
+            </div>                       
+        </div>                    
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
