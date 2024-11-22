@@ -5,13 +5,8 @@ html_bp = Blueprint('template', __name__)
 
 @html_bp.route('/')
 def home():
-    data = {
-        'title': 'Welcome to My Flask App',
-        'message': 'This is a simple HTML page rendered by Flask.',
-        'items': ['Item 1', 'Item 2', 'Item 3']
-    }
-    username = "Georgio"
-    return render_template('index.html', data=data, name=username)
+    data = [1,2,3]
+    return render_template('index.html', charro=data)
 
 @html_bp.route('/categories', methods=['GET'])
 def categories_page():

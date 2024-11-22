@@ -1,4 +1,5 @@
-import psycopg2
+import psycopg2 # PostgreSQL adapter for Python 
+
 import os
 
 def connect():
