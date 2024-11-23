@@ -18,3 +18,8 @@ def categories_page():
         categories = []
     return render_template('categories.html', categories=categories)
 
+
+@html_bp.route('/dashboard')
+def admin_dashboard():
+    return render_template('dashboard.html')
+
