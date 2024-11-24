@@ -21,38 +21,34 @@ def create_cars():
         data = request.form
     else:
         return jsonify({'error': 'Unsupported content type'}), 415
-
-    car_id = data.get('car_id')
-    if not car_id:
-        return jsonify({'error': 'cars is required'}), 400
     
     vin_number = data.get('vin_number')
     if not vin_number:
-        return jsonify({'error': 'cars is required'}), 400
+        return jsonify({'error': 'vin is required'}), 400
 
     purchase_date = data.get('purchase_date')
     if not purchase_date:
-        return jsonify({'error': 'cars is required'}), 400
+        return jsonify({'error': 'purchase date is required'}), 400
 
     brand_id = data.get('brand_id')
     if not brand_id:
-        return jsonify({'error': 'cars is required'}), 400
+        return jsonify({'error': 'brand is required'}), 400
 
     model = data.get('model')
     if not model:
-        return jsonify({'error': 'cars is required'}), 400
+        return jsonify({'error': 'model is required'}), 400
 
     make = data.get('make')
     if not make:
-        return jsonify({'error': 'cars is required'}), 400
+        return jsonify({'error': 'make is required'}), 400
 
     rental_price = data.get('rental_price')
     if not rental_price:
-        return jsonify({'error': 'cars is required'}), 400
+        return jsonify({'error': 'rental price is required'}), 400
 
     insurance_price = data.get('insurance_price')
     if not insurance_price:
-        return jsonify({'error': 'cars is required'}), 400
+        return jsonify({'error': 'insurance is required'}), 400
 
 
     conn = db_con.connect()
@@ -60,8 +56,8 @@ def create_cars():
 
     try:
         cur.execute(
-            "INSERT INTO cars (car_id, vin_number, purchase_date, brand_id, model, make, rental_price, insurance_price) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING car_id;",
-            (car_id, vin_number, purchase_date, brand_id, model, make, rental_price, insurance_price)
+            "INSERT INTO cars (vin_number, purchase_date, brand_id, model, make_year, rental_price, insurance_price) VALUES (%s,%s,%s,%s,%s,%s,%s) RETURNING car_id;",
+            (vin_number, purchase_date, brand_id, model, make, rental_price, insurance_price)
         )
         conn.commit()
         car_id = cur.fetchone()
@@ -75,7 +71,7 @@ def create_cars():
     return jsonify({'id': car_id, 'message': 'cars created successfully'}), 201
 
 @cars_bp.route('/api/cars/<int:id>', methods=['GET'])
-def get_cars(id):
+def get_cars_by_id(id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute("SELECT * FROM cars WHERE car_id = %s;", (id,))
@@ -101,7 +97,7 @@ def get_cars_by_price_range():
     return jsonify(cars) if cars else jsonify({'Error':'No cars found'})
 
 @cars_bp.route('/api/cars/<int:brand_id>', methods=['GET'])
-def get_cars(brand_id):
+def get_cars_by_brand(brand_id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute("SELECT * FROM cars WHERE brand_id = %s;", (brand_id,))
@@ -112,7 +108,7 @@ def get_cars(brand_id):
 
 
 @cars_bp.route('/api/cars/<int:available>', methods=['GET'])
-def get_cars(available):
+def get_cars_by_availability(available):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute("SELECT * FROM cars_availability_V WHERE available = %s;", (available,))

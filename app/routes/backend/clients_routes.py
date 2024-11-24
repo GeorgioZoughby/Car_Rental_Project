@@ -7,10 +7,25 @@ clients_bp = Blueprint('clients', __name__)
 def get_clients():
     conn = db_con.connect() 
     cur = conn.cursor()
-    cur.execute("SELECT * FROM clients;")
+    cur.execute("""SELECT 
+                client_id,
+                creation_date::text AS creation_date,
+                username,
+                encode(password, 'base64') AS password,
+                title,
+                first_name,
+                last_name,
+                birth_date::text AS birth_date, 
+                gender,
+                email,
+                phone_number,
+                country_id,
+                address
+            FROM clients;""")
     clients = cur.fetchall()
     cur.close()
     conn.close()
+    print(clients)
     return jsonify(clients)
 
 @clients_bp.route('/api/clients', methods=['POST'])
@@ -94,7 +109,7 @@ def create_clients():
     return jsonify({'id': client_id, 'message': 'clients created successfully'}), 201
 
 @clients_bp.route('/api/clients/<int:id>', methods=['GET'])
-def get_clients(id):
+def get_clients_by_id(id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute("SELECT * FROM clients WHERE client_id = %s;", (id,))

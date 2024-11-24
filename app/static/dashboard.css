@@ -20,7 +20,7 @@ body{
 
 .card{
     width: 45vw;
-    height: 43vh;
+    height: 43  vh;
     border-radius: 20px;
     background-color: #fff;
     padding: 10px 30px 10px 30px;
@@ -52,4 +52,132 @@ body{
     color: white;
     padding: 5px 15px 5px 5px;
     gap:5px;
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(5px);
+}
+
+.form-dialog {
+    border-radius: 10px;
+    width: 30vw;
+    height: 80vh;
+    border: 0px;
+    position: relative;
+}
+
+.form-dialog .group .input {
+    width: 22vw;
+}
+
+.form-dialog .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: poppins, sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 50px;
+}
+
+.dialog-form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.middle-buttons {
+    position: absolute;
+    bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.group {
+    position: relative;
+}
+
+.input {
+    font-size: 16px;
+    padding: 20px 5px 5px 5px;
+    display: block;
+    width: 355px;
+    margin-right: auto;
+    border: none;
+    border-bottom: 1px solid #A8A8A8;
+    background: transparent;
+    margin-bottom: 10px;
+    color: rgb(32, 31, 31);
+    font-family: poppins, sans-serif;
+}
+
+.input:focus {
+    outline: none;
+}
+
+label {
+    font-family: poppins, sans-serif;
+    color: #797777;
+    font-size: 14px;
+    font-weight: 500;
+    position: absolute;
+    pointer-events: none;
+    left: 2px;
+    top: -5px;
+    padding-left: 5px;
+}
+
+.column h3 {
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    font-weight: 500;
+    color: black;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    background-color: #f0f0f0;
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.column h3 span {
+    color: black;
+    font-size: 30px;
+}
+
+.column h3 span:hover {
+    cursor: pointer;
+}
+
+.button {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #258af7;
+    color: white;
+    padding: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-color: #258af7;
+    border-radius: 3px;
+    border: 0px;
+    margin-top: 5px;
+    min-width: 80px;
+    font-family: poppins, sans-serif;
+    font-size: 17px;
+}
+
+.submit {
+    background-color: #258af7;
+    border: 1px solid #797777;
+}
+
+.cancel {
+    background-color: #fff;
+    color: black;
+    border: 1px solid #797777;
 }

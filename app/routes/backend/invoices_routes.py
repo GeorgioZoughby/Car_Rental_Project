@@ -66,7 +66,7 @@ def create_invoices():
     return jsonify({'id': invoices_id, 'message': 'invoices created successfully'}), 201
 
 @invoices_bp.route('/api/invoices/<int:id>', methods=['GET'])
-def get_invoices(id):
+def get_invoices_by_id(id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute("SELECT * FROM invoices WHERE invoice_id = %s;", (id,))

@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 import connection as db_con
+import os
 
 brand_bp = Blueprint('brand', __name__)
 
@@ -41,8 +42,8 @@ def create_brand():
             return "No selected file", 400
         if file:
             filename = file.filename
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(filepath)
+            #filepath = os.path.join(config['UPLOAD_FOLDER'], filename)
+            #file.save(filepath)
         cur.execute(
             "INSERT INTO brands (brand, brand_country, logo_url) VALUES (%s) RETURNING brand_id;",
             (brand, brand_country, logo_url)
@@ -59,7 +60,7 @@ def create_brand():
     return jsonify({'id': brand_id, 'message': 'brand created successfully'}), 201
 
 @brand_bp.route('/api/brands/<int:id>', methods=['GET'])
-def get_brand(id):
+def get_brand_by_id(id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute("SELECT * FROM brands WHERE brand_id = %s;", (id,))

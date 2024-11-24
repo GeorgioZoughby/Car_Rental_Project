@@ -8,7 +8,7 @@ from .backend.cars_routes import cars_bp
 from .backend.clients_routes import clients_bp
 from .backend.countries_routes import countries_bp
 from .backend.cars_maintenance_routes import cars_maintenance_bp
-from .backend.cars_image_routes import cars_image_bp
+from .backend.cars_image_routes import cars_images_bp
 from .backend.invoices_routes import invoices_bp
 from .html_routes import html_bp
 
@@ -24,6 +24,6 @@ def init_blueprints(app):
     app.register_blueprint(clients_bp)
     app.register_blueprint(countries_bp)
     app.register_blueprint(cars_maintenance_bp)
-    app.register_blueprint(cars_image_bp)
+    app.register_blueprint(cars_images_bp)
     app.register_blueprint(invoices_bp)
 

@@ -34,7 +34,6 @@ body {
     flex: 2;
     display: flex;
     justify-content: center;
-    gap: 20px; 
 }
 
 .sidebar-icon {

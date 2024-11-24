@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 import connection as db_con
+import os
 
 cars_images_bp = Blueprint('car_images', __name__)
 
@@ -23,7 +24,8 @@ def create_cars_images():
         return jsonify({'error': 'Unsupported content type'}), 415
 
     cars_images = data.get('car_id')
-    if not car_images:
+    image_url = data.get('image_url')
+    if not cars_images:
         return jsonify({'error': 'Car Image is required'}), 400
 
     conn = db_con.connect()
@@ -39,8 +41,8 @@ def create_cars_images():
         for file in files:
             if file:
                 filename = file.filename
-                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                file.save(filepath)
+                #filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                #file.save(filepath)
                 uploaded_files.append(filename)
         cur.execute(
             "INSERT INTO cars_images (car_id, image_url) VALUES (%s,%s) RETURNING car_id;",
@@ -58,7 +60,7 @@ def create_cars_images():
     return jsonify({'id': car_id, 'message': 'Car image created successfully'}), 201
 
 @cars_images_bp.route('/api/cars_images/<int:id>', methods=['GET'])
-def get_cars_images(id):
+def get_cars_images_by_id(id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute("SELECT * FROM cars_images WHERE car_id = %s;", (id,))

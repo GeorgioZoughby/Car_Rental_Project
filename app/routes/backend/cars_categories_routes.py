@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 import connection as db_con
 
-cars_categories_bp = Blueprint('category', __name__)
+cars_categories_bp = Blueprint('cars_category', __name__)
 
 @cars_categories_bp.route('/api/cars_categories', methods=['GET'])
 def get_cars_categories():

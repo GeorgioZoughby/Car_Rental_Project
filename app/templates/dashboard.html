@@ -178,8 +178,8 @@
     <div class="row">
         <div class="card">
             <div class="card-header">
-            <h2 class="card-title">Rented Cars</h2>
-            <button><i class="material-icons">add</i>New Rental</button>
+                <h2 class="card-title">Rented Cars</h2>
+                <button onclick="openBookingDialog()"><i class="material-icons">add</i>New Rental</button>
             </div>
             <table id="rented-table" class="display" style="width:100%;">
                 <thead>
@@ -263,7 +263,7 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title">Available Cars</h2>
-                <button><i class="material-icons">add</i>New Car</button>
+                <button onclick="openCarDialog()"><i class="material-icons">add</i>New Car</button>
             </div>
             <table id="available-table" class="display" style="width:100%;">
                 <thead>
@@ -345,6 +345,166 @@
             </table>
         </div>
     </div>
+    <dialog class="form-dialog" id="add_new_car">
+        <h2 class="title">New Payment</h2>
+        <div class="dialog-form-column">
+            <div class="group">
+                <input required="" type="text" placeholder="" class="input" value="<?php echo $current_rate; ?>"
+                    disabled>
+                <label class="form-label">Today's Rate</label>
+            </div>
+            <div class="group">
+                <input required="" type="text" placeholder="" value="<?php echo $closed_rate; ?>" class="input"
+                    disabled>
+                <label class="form-label">Closed Rate</label>
+            </div>
+            <div class="group">
+                <select class="input" required>
+                    <option value="" selected>Select</option>
+                    <option value="1">00</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                </select>
+                <label class="form-label">Type Of Payment*</label>
+            </div>
+            <div class="group">
+                <label class="form-label">Currency*</label>
+                <select class="input">
+                    <option value="" selected>Select</option>
+                    <option value="1">NGN</option>
+                    <option value="2">USD</option>
+                </select>
+            </div>
+            <div class="group">
+                <input required="" type="text" value="" class="input">
+                <label class="form-label">Payment Amount*</label>
+            </div>
+            <div class="group">
+                <input required="" type="text" placeholder="" class="input">
+                <label class="form-label">Notes</label>
+            </div>
+            <div class="middle-buttons">
+                <button type="button" class="button cancel" onclick="closeCarDialog()">Cancel</button>
+                <button type="button" class="button submit">Add</button>
+            </div>
+        </div>
+    </dialog>
+    <dialog class="form-dialog" id="add_new_booking">
+        <h2 class="title">New Booking</h2>
+        <div class="dialog-form-column">
+            <div class="group">
+                <select class="input" id="car-select" name="car_id" required>
+                    <option value="" selected>Select</option>
+                </select>
+                <label class="form-label">Car*</label>
+            </div>
+            <div class="group">
+                <label class="form-label">Client*</label>
+                <select class="input" id="client-select" name="client_id" required>
+                    <option value="" selected>Select</option>
+                </select>
+            </div>
+            <div class="group">
+                <input required="" type="date" id="start_date" name="start_date" class="input">
+                <label class="form-label">From*</label>
+            </div>
+            <div class="group">
+                <input required="" type="date" id="end_date" name="end_date" class="input">
+                <label class="form-label">To*</label>
+            </div>
+            <div class="middle-buttons">
+                <button type="button" class="button cancel" onclick="closeBookingDialog()">Cancel</button>
+                <button type="button" class="button submit" onclick="submitBookingForm()">Add</button>
+            </div>
+        </div>
+    </dialog>
+    <script>
+        async function submitBookingForm() {
+            const carId = document.getElementById('car-select').value;
+            const clientId = document.getElementById('client-select').value;
+            const startDate = document.getElementById('start_date').value;
+            const endDate = document.getElementById('end_date').value;
+
+            if (!carId || !clientId || !startDate || !endDate) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            if (startDate >= endDate) {
+                alert('End date must be after start date.');
+                return;
+            }
+
+            const data = {
+                car_id: carId,
+                client_id: clientId,
+                start_date: startDate,
+                end_date: endDate,
+            };
+
+            try {
+                const response = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    alert('Booking added successfully!');
+                    closeBookingDialog();
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + (error.message || 'Failed to add booking.'));
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        fetch('/api/cars')
+            .then(response => response.json())
+            .then(data => {
+                const carSelect = document.getElementById('car-select');
+                data.forEach(car => {
+                    const option = document.createElement('option');
+                    option.value = car[0];
+                    option.textContent = car[4];
+                    carSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching clients:', error));
+
+        fetch('/api/clients')
+            .then(response => response.json())
+            .then(data => {
+                const clientSelect = document.getElementById('client-select');
+                data.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client[0];
+                    option.textContent = client[4] + ' ' + client[5] + ' ' + client[6];
+                    clientSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching clients:', error));
+    </script>
+    <script>
+        function openCarDialog() {
+            document.getElementById('add_new_car').showModal();
+        }
+        function closeCarDialog() {
+            document.getElementById('add_new_car').close();
+        }
+        function openBookingDialog() {
+            document.getElementById('add_new_booking').showModal();
+        }
+        function closeBookingDialog() {
+            document.getElementById('add_new_booking').close();
+        }        
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script>

@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 import connection as db_con
+from datetime import datetime
 
 bookings_bp = Blueprint('bookings', __name__)
 
@@ -22,14 +23,6 @@ def create_bookings():
     else:
         return jsonify({'error': 'Unsupported content type'}), 415
 
-    booking_id = data.get('booking_id')
-    if not booking_id:
-        return jsonify({'error': 'booking id is required'}), 400
-
-    booking_date = data.get('booking_date')
-    if not booking_date:
-        return jsonify({'error': 'booking date is required'}), 400
-
     client_id = data.get('client_id')
     if not client_id:
         return jsonify({'error': 'Client id is required'}), 400
@@ -46,22 +39,14 @@ def create_bookings():
     if not end_date:
         return jsonify({'error': 'End Date is required'}), 400
 
-    total_price = data.get('total_price')
-    if not total_price:
-        return jsonify({'error': 'Total Price is required'}), 400
-
-    insurance_price = data.get('insurance_price')
-    if not insurance_price:
-        return jsonify({'error': 'insurance price is required'}), 400
-
 
     conn = db_con.connect()
     cur = conn.cursor()
 
     try:
         cur.execute(
-            "INSERT INTO bookings (booking_id , booking_date, client_id, car_id, start_date, end_date, total_price, insurance_price) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) RETURNING booking_id;",
-            (booking_id,booking_date, client_id, car_id, start_date, end_date, total_price, insurance_price)
+            "INSERT INTO bookings (booking_date, client_id, car_id, start_date, end_date) VALUES (CURRENT_DATE,%s,%s,%s,%s) RETURNING booking_id;",
+            (client_id, car_id, start_date, end_date)
         )
         conn.commit()
         bookings_id = cur.fetchone()
@@ -75,7 +60,7 @@ def create_bookings():
     return jsonify({'id': bookings_id, 'message': 'bookings created successfully'}), 201
 
 @bookings_bp.route('/api/bookings/<int:id>', methods=['GET'])
-def get_bookings(id):
+def get_bookings_by_id(id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute("SELECT * FROM bookings WHERE booking_id = %s;", (id,))
@@ -90,8 +75,8 @@ def update_bookings(id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute(
-        "UPDATE bookings SET booking_date = %s, client_id = %s car_id = %s, start_date = %s, end_date = %s, total_price = %s, insurance_price = %s WHERE booking_id = %s;",
-        (data['booking_date'], data['client_id'],data['car_id'],data['start_date'], data['end_date'], data['total_price'], data['insurance_price'], id)
+        "UPDATE bookings SET booking_date = %s, client_id = %s car_id = %s, start_date = %s, end_date = %s WHERE booking_id = %s;",
+        (data['booking_date'], data['client_id'],data['car_id'],data['start_date'], data['end_date'], id)
     )
     conn.commit()
     cur.close()
