@@ -4,7 +4,6 @@ import functions.passwords as password_func
 
  
 
-
 admins_bp = Blueprint('admins', __name__)
 
 @admins_bp.route('/api/admins', methods=['GET'])
