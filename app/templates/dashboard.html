@@ -35,7 +35,7 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title">Cars</h2>
-                <button onclick="openBookingDialog()"><i class="material-icons">add</i>New Car</button>
+                <button onclick="openCarDialog()"><i class="material-icons">add</i>New Car</button>
             </div>
             <table id="available_cars" class="display" style="width:100%;">
                 <thead>
@@ -68,7 +68,7 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                
+
                 <tbody style="text-wrap: nowrap;">
                 </tbody>
             </table>
@@ -91,52 +91,98 @@
             </table>
         </div>
     </div>
+    
     <dialog class="form-dialog" id="add_new_car">
-        <h2 class="title">New Payment</h2>
+        <h2 class="title">New Car</h2>
         <div class="dialog-form-column">
             <div class="group">
-                <input required="" type="text" placeholder="" class="input" value="<?php echo $current_rate; ?>"
-                    disabled>
-                <label class="form-label">Today's Rate</label>
+                <input type="text" id="vin_number" name="vin_number" class="input" required>
+                <label class="form-label">VIN number*</label>
             </div>
             <div class="group">
-                <input required="" type="text" placeholder="" value="<?php echo $closed_rate; ?>" class="input"
-                    disabled>
-                <label class="form-label">Closed Rate</label>
+                <input type="date" id="purchase_date" name="purchase_date" class="input" required>
+                <label class="form-label">Purchase Date*</label>
             </div>
             <div class="group">
-                <select class="input" required>
+                <label class="form-label">Brand*</label>
+                <select class="input" id="brand-select" name="brand_id" required>
                     <option value="" selected>Select</option>
-                    <option value="1">00</option>
-                    <option value="1">01</option>
-                    <option value="2">02</option>
-                    <option value="3">03</option>
-                    <option value="4">04</option>
-                    <option value="5">05</option>
-                </select>
-                <label class="form-label">Type Of Payment*</label>
-            </div>
-            <div class="group">
-                <label class="form-label">Currency*</label>
-                <select class="input">
-                    <option value="" selected>Select</option>
-                    <option value="1">NGN</option>
-                    <option value="2">USD</option>
                 </select>
             </div>
             <div class="group">
-                <input required="" type="text" value="" class="input">
-                <label class="form-label">Payment Amount*</label>
+                <input type="text" id="model" name="model" class="input" required>
+                <label class="form-label">Model*</label>
             </div>
             <div class="group">
-                <input required="" type="text" placeholder="" class="input">
-                <label class="form-label">Notes</label>
+                <input type="text" id="make" name="make" class="input" required>
+                <label class="form-label">Make Year*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="rental_price" name="rental_price" class="input" required>
+                <label class="form-label">Rental Price Per Day*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <label class="form-label">Insurance Price Per Day*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <label class="form-label">Transmission*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <label class="form-label">Fuel Type*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <label class="form-label">Engine Size*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <label class="form-label">HorsePower*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <label class="form-label">Mileage*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <label class="form-label">Seating Capacity*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <label class="form-label">Color*</label>
+            </div>
+            <div class="group">
+                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <label class="form-label">Options*</label>
+            </div>
+            <div class="group">
+                <input type="date" id="purchase_date" name="purchase_date" class="input" required>
+                <label class="form-label">Last Service Date*</label>
+            </div>
+            <div class="group">
+                <input type="date" id="purchase_date" name="purchase_date" class="input" required>
+                <label class="form-label">Next Service Date*</label>
+            </div>
+            <div class="group">
+                <input type="date" id="purchase_date" name="purchase_date" class="input" required>
+                <label class="form-label">Registration Expiry Date*</label>
+            </div>
+            <div class="group">
+                <select class="input" id="" name="" required>
+                    <option value="" selected></option>
+                    <option value="True">Yes</option>
+                    <option value="False">No</option>
+                </select>
+                <label class="form-label">Been in an Accident*<label>
             </div>
             <div class="middle-buttons">
                 <button type="button" class="button cancel" onclick="closeCarDialog()">Cancel</button>
-                <button type="button" class="button submit">Add</button>
+                <button type="button" class="button submit" onclick="submitCarDialog()">Add</button>
             </div>
         </div>
+
     </dialog>
     <dialog class="form-dialog" id="add_new_booking">
         <h2 class="title">New Booking</h2>
@@ -154,7 +200,6 @@
                 </select>
             </div>
             <script>
-                // Fetch data and populate car-select dropdown
                 fetch('/api/carsV')
                     .then(response => response.json())
                     .then(data => {
@@ -195,6 +240,45 @@
             </div>
         </div>
     </dialog>
+
+    <dialog class="form-dialog" id="update_maintenance">
+        <h2 class="title">Update Maintenance</h2>
+        <div class="dialog-form-column">
+            <div class="group">
+                <input required="" type="text" id="car_id" name="car_id" class="input" disabled>
+                <label class="form-label">Car ID*</label>
+            </div>
+            <div class="group">
+                <input required="" type="text" id="car_name" name="car_name" class="input" disabled>
+                <label class="form-label">Car*</label>
+            </div>
+            <div class="group">
+                <input required="" type="date" id="registration_expiration_date" name="registration_expiration_date"
+                    class="input">
+                <label class="form-label">Registration Expiry Date*</label>
+            </div>
+            <div class="group">
+                <input required="" type="date" id="last_service_date" name="last_service_date" class="input">
+                <label class="form-label">Last Service Date*</label>
+            </div>
+            <div class="group">
+                <input required="" type="date" id="service_due_date" name="service_due_date" class="input">
+                <label class="form-label">Next Service Date*</label>
+            </div>
+            <div class="group">
+                <select class="input" id="accidents_history" name="accidents_history" required>
+                    <option value="True">Yes</option>
+                    <option value="False">No</option>
+                </select>
+                <label class="form-label">Been in an Accident*</label>
+            </div>
+            <div class="middle-buttons">
+                <button type="button" class="button cancel" onclick="closeMaintenanceDialog()">Cancel</button>
+                <button type="button" class="button submit" onclick="submitMaintenanceDialog()">Update</button>
+            </div>
+        </div>
+    </dialog>
+
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script>
@@ -209,7 +293,46 @@
         }
         function closeBookingDialog() {
             document.getElementById('add_new_booking').close();
-        }        
+        }
+        function closeMaintenanceDialog() {
+            document.getElementById('update_maintenance').close();
+        }
+        function updateMaintenance(id) {
+            // Show the dialog
+            const dialog = document.getElementById('update_maintenance');
+            dialog.showModal();
+
+            // Fetch data from the API
+            fetch(`/api/cars_maintenance/${id}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch data');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(registration => {
+                    document.getElementById('car_id').value = registration[0];
+                    document.getElementById('car_name').value = registration[1];
+
+                    document.getElementById('registration_expiration_date').value = formatDate(registration[2]);
+                    document.getElementById('last_service_date').value = formatDate(registration[3]);
+                    document.getElementById('service_due_date').value = formatDate(registration[4]);
+
+                    document.getElementById('accidents_history').value = registration[5] ? "True" : "False";
+                });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    alert('Failed to load maintenance details.');
+                });
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toISOString().split('T')[0];
+        }
+
     </script>
     <script>
         $(document).ready(function () {
@@ -299,7 +422,7 @@
                     <td>${registration[4]}</td>
                     <td>${registration[5]}</td>
                     <td style="color: #ff7d7d;">${formattedDate}</td>
-                    <td><button onclick="updateExpiration(${registration[0]})">Update</button></td>
+                    <td><button onclick="updateMaintenance(${registration[0]})">Update</button></td>
                 `;
                         registrationTableBody.appendChild(row);
                     });
@@ -315,14 +438,14 @@
                             registration[4],
                             registration[5],
                             `<span style="color: #fa5246; font-weight: 800">${formattedDate}</span>`,
-                            `<button class="button" style="font-size:1rem; background-color: #fa5246" onclick="updateExpiration(${registration[0]})">Update</button>`
+                            `<button class="button" style="font-size:1rem; background-color: #fa5246" onclick="updateMaintenance(${registration[0]})">Update</button>`
                         ];
                         registrationTable.row.add(formattedRegistration).draw(false);
                     });
                 })
                 .catch(error => console.error('Error fetching registrations:', error));
 
-                fetch('/api/cars_maintenance/need_service_soon')
+            fetch('/api/cars_maintenance/need_service_soon')
                 .then(response => response.json())
                 .then(data => {
                     const maintenanceTableBody = document.querySelector('#maintenance-table tbody');
@@ -345,7 +468,7 @@
                     <td>${registration[5]}</td>
                     <td>${lastDate}</td>
                     <td style="color: #ff7d7d;">${dueDate}</td>
-                    <td><button onclick="updateExpiration(${registration[0]})">Update</button></td>
+                    <td><button onclick="updateMaintenance(${registration[0]})">Update</button></td>
                 `;
                         maintenanceTableBody.appendChild(row);
                     });
@@ -360,14 +483,14 @@
                             day: '2-digit',
                             month: 'short',
                             year: 'numeric'
-                        }).replace(/ /g, ' ');                        
+                        }).replace(/ /g, ' ');
                         const formattedRegistration = [
                             registration[8],
                             registration[4],
                             registration[5],
                             lastDate,
                             `<span style="color: #fa5246; font-weight: 800">${dueDate}</span>`,
-                            `<button class="button" style="font-size:1rem; background-color: #fa5246" onclick="updateExpiration(${registration[0]})">Update</button>`
+                            `<button class="button" style="font-size:1rem; background-color: #fa5246" onclick="updateMaintenance(${registration[0]})">Update</button>`
                         ];
                         maintenanceTable.row.add(formattedRegistration).draw(false);
                     });
@@ -425,6 +548,50 @@
                 alert('Error: ' + error.message);
             }
         }
+
+    async function submitMaintenanceDialog() {
+        const carId = document.getElementById('car_id').value;
+        const registrationExpirationDate = document.getElementById('registration_expiration_date').value;
+        const lastServiceDate = document.getElementById('last_service_date').value;
+        const serviceDueDate = document.getElementById('service_due_date').value;
+        const accidentHistory = document.getElementById('accidents_history').value;
+
+        const comments = "No additional comments";
+
+        if (!carId || !registrationExpirationDate || !lastServiceDate || !serviceDueDate || !accidentHistory) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/cars_maintenance/${carId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    registration_expiration_date: registrationExpirationDate,
+                    last_service_date: lastServiceDate,
+                    service_due_date: serviceDueDate,
+                    accident_history: accidentHistory,
+                    comments: comments
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                alert(`Error: ${errorData.message || 'Failed to update maintenance record'}`);
+                return;
+            }
+
+            const result = await response.json();
+            alert(result.message);
+            location.reload();
+        } catch (error) {
+            console.error('Error updating maintenance record:', error);
+            alert('An error occurred. Please try again later.');
+        }
+    }
 
     </script>
 </body>

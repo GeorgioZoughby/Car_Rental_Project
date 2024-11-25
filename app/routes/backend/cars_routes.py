@@ -23,32 +23,18 @@ def create_cars():
         return jsonify({'error': 'Unsupported content type'}), 415
     
     vin_number = data.get('vin_number')
-    if not vin_number:
-        return jsonify({'error': 'vin is required'}), 400
 
     purchase_date = data.get('purchase_date')
-    if not purchase_date:
-        return jsonify({'error': 'purchase date is required'}), 400
 
     brand_id = data.get('brand_id')
-    if not brand_id:
-        return jsonify({'error': 'brand is required'}), 400
 
     model = data.get('model')
-    if not model:
-        return jsonify({'error': 'model is required'}), 400
 
     make = data.get('make')
-    if not make:
-        return jsonify({'error': 'make is required'}), 400
 
     rental_price = data.get('rental_price')
-    if not rental_price:
-        return jsonify({'error': 'rental price is required'}), 400
 
     insurance_price = data.get('insurance_price')
-    if not insurance_price:
-        return jsonify({'error': 'insurance is required'}), 400
 
 
     conn = db_con.connect()

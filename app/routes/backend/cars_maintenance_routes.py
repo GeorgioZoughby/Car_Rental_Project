@@ -68,11 +68,11 @@ def create_cars_maintenance():
 def get_cars_maintenance_by_id(id):
     conn = db_con.connect()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM cars_full_details_V WHERE car_id = %s;", (id,))
+    cur.execute("SELECT car_id, CONCAT_WS(' ', brand, model, make_year) as car_name, registration_expiration_date, last_service_date, service_due_date, accident_history  FROM cars_full_details_V WHERE car_id = %s;", (id,))
     cars_maintenance = cur.fetchall()
     cur.close()
     conn.close()
-    return jsonify(cars_maintenance) if cars_maintenance else jsonify({'error': 'cars maintenance not found'}), 404
+    return jsonify(cars_maintenance),200
 
 @cars_maintenance_bp.route('/api/cars_maintenance/past_due', methods=['GET'])
 def get_past_maintenance():
@@ -118,13 +118,13 @@ def update_cars_maintenance(id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute(
-        "UPDATE cars_maintenance SET Last_service_date = %s, service_due_date = %s, registration_expiration_date = %s, accident_history = %s, comments = %s  WHERE id = %s;",
-        (data['Last_service_date'], data['service_due_date'], data['registration_expiration_date'], data['accident_history'], data['comments'], id)
+        "UPDATE cars_maintenance SET last_service_date = %s, service_due_date = %s, registration_expiration_date = %s, accident_history = %s, comments = %s  WHERE car_id = %s;",
+        (data['last_service_date'], data['service_due_date'], data['registration_expiration_date'], data['accident_history'], data['comments'], id)
     )
     conn.commit()
     cur.close()
     conn.close()
-    return jsonify({'message': 'Cars maintenance updated successfully'})
+    return jsonify({'message': 'Car record updated successfully'}), 200
 
 @cars_maintenance_bp.route('/api/cars_maintenance/<int:id>', methods=['DELETE'])
 def delete_cars_maintenance(id):

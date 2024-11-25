@@ -83,18 +83,18 @@ dialog::backdrop {
 .dialog-form-column {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 15px;
     justify-content: center;
     align-items: center;
 }
 
 .middle-buttons {
-    position: absolute;
     bottom: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
+    margin-top:3rem;
 }
 
 .group {
