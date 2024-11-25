@@ -13,6 +13,16 @@ def get_cars_details():
     conn.close()
     return jsonify(cars_details)
 
+@cars_details_bp.route('/api/cars_details_full', methods=['GET'])
+def get_cars_details_full():
+    conn = db_con.connect() 
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM cars_full_details_v;")
+    cars_details = cur.fetchall()
+    cur.close()
+    conn.close()
+    return jsonify(cars_details)
+
 @cars_details_bp.route('/api/cars_details', methods=['POST'])
 def create_cars_details():
     if request.content_type == 'application/json':
@@ -78,10 +88,20 @@ def create_cars_details():
     return jsonify({'id': car_id, 'message': 'Car details created successfully'}), 201
 
 @cars_details_bp.route('/api/cars_details/<int:id>', methods=['GET'])
-def get_car_details(id):
+def get_car_details_full(id):
     conn = db_con.connect()
     cur = conn.cursor()
     cur.execute("SELECT * FROM cars_details WHERE car_id = %s;", (id,))
+    car = cur.fetchone()
+    cur.close()
+    conn.close()
+    return jsonify(car) if car else jsonify({'error': 'Car details not found'}), 404
+
+@cars_details_bp.route('/api/cars_details_full/<int:id>', methods=['GET'])
+def get_car_details(id):
+    conn = db_con.connect()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM cars_full_details_V WHERE car_id = %s;", (id,))
     car = cur.fetchone()
     cur.close()
     conn.close()

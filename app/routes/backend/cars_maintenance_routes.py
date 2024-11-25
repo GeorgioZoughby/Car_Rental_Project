@@ -8,7 +8,7 @@ cars_maintenance_bp = Blueprint('cars_maintenance', __name__)
 def get_cars_maintenance():
     conn = db_con.connect() 
     cur = conn.cursor()
-    cur.execute("SELECT * FROM cars_maintenance;")
+    cur.execute("SELECT * FROM cars_full_details_V;")
     cars_maintenance = cur.fetchall()
     cur.close()
     conn.close()
@@ -54,7 +54,7 @@ def create_cars_maintenance():
             (Last_service_date, service_due_date, registration_expiration_date, accident_history, comments)
         )
         conn.commit()
-        cars_maintenance_id = cur.fetchone()
+        cars_maintenance_id = cur.fetchall()
     except Exception as e:
         conn.rollback()
         return jsonify({'error': 'Database error', 'details': str(e)}), 500
@@ -68,8 +68,8 @@ def create_cars_maintenance():
 def get_cars_maintenance_by_id(id):
     conn = db_con.connect()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM cars_maintenance WHERE car_id = %s;", (id,))
-    cars_maintenance = cur.fetchone()
+    cur.execute("SELECT * FROM cars_full_details_V WHERE car_id = %s;", (id,))
+    cars_maintenance = cur.fetchall()
     cur.close()
     conn.close()
     return jsonify(cars_maintenance) if cars_maintenance else jsonify({'error': 'cars maintenance not found'}), 404
@@ -79,8 +79,8 @@ def get_past_maintenance():
     conn = db_con.connect()
     cur = conn.cursor()
     today = datetime.today().strftime('%Y-%m-%d')
-    cur.execute("SELECT * FROM cars_maintenance WHERE service_due_date < %s;", (today,))
-    cars_maintenance = cur.fetchone()
+    cur.execute("SELECT * FROM cars_full_details_V WHERE service_due_date < %s;", (today,))
+    cars_maintenance = cur.fetchall()
     cur.close()
     conn.close()
     return jsonify(cars_maintenance) if cars_maintenance else jsonify({'error': 'cars maintenance not found'}), 404
@@ -91,11 +91,11 @@ def get_soon_past_maintenance():
     cur = conn.cursor()
     today = datetime.today().strftime('%Y-%m-%d')
     one_month_today = (datetime.today() + timedelta(days=30)).strftime('%Y-%m-%d')
-    cur.execute("SELECT * FROM cars_maintenance WHERE service_due_date BETWEEN %s AND %s;", (today,one_month_today))
-    cars_maintenance = cur.fetchone()
+    cur.execute("SELECT * FROM cars_full_details_V WHERE service_due_date BETWEEN %s AND %s;", (today,one_month_today))
+    cars_maintenance = cur.fetchall()
     cur.close()
     conn.close()
-    return jsonify(cars_maintenance) if cars_maintenance else jsonify({'error': 'cars maintenance not found'}), 404
+    return jsonify(cars_maintenance), 200
 
 @cars_maintenance_bp.route('/api/cars_maintenance/registration_expiry', methods=['GET'])
 def get_registration_expiry_maintenance():
@@ -103,11 +103,11 @@ def get_registration_expiry_maintenance():
     cur = conn.cursor()
     today = datetime.today().strftime('%Y-%m-%d')
     three_months_today = (datetime.today() + timedelta(days=90)).strftime('%Y-%m-%d')
-    cur.execute("SELECT * FROM cars_maintenance WHERE registration_expiration_date BETWEEN %s AND %s;", (today,three_months_today))
-    cars_maintenance = cur.fetchone()
+    cur.execute("SELECT * FROM cars_full_details_V WHERE registration_expiration_date BETWEEN %s AND %s;", (today,three_months_today))
+    cars_maintenance = cur.fetchall()
     cur.close()
     conn.close()
-    return jsonify(cars_maintenance) if cars_maintenance else jsonify({'error': 'cars maintenance not found'}), 404
+    return jsonify(cars_maintenance)
 
 
 
