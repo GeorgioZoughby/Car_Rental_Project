@@ -14,8 +14,8 @@ def get_cars_maintenance():
     conn.close()
     return jsonify(cars_maintenance)
 
-@cars_maintenance_bp.route('/api/cars_maintenance', methods=['POST'])
-def create_cars_maintenance():
+@cars_maintenance_bp.route('/api/cars_maintenance/<int:car_id>', methods=['POST'])
+def create_cars_maintenance(car_id):
     if request.content_type == 'application/json':
         data = request.get_json()
     elif request.content_type == 'application/x-www-form-urlencoded':
@@ -23,46 +23,32 @@ def create_cars_maintenance():
     else:
         return jsonify({'error': 'Unsupported content type'}), 415
 
-    Last_service_date = data.get('Last_service_date')
-    if not Last_service_date:
-        return jsonify({'error': 'Last service date is required'}), 400
+    last_service_date = data.get('last_service_date')
 
     service_due_date = data.get('service_due_date')
-    if not service_due_date:
-        return jsonify({'error': 'service due date date is required'}), 400
 
     registration_expiration_date = data.get('registration_expiration_date')
-    if not registration_expiration_date:
-        return jsonify({'error': 'registration expiration date date is required'}), 400
 
     accident_history = data.get('accident_history')
-    if not accident_history:
-        return jsonify({'error': 'accident history is required'}), 400
 
     comments = data.get('comments')
-    if not comments:
-        return jsonify({'error': 'Comments are required'}), 400
-
-
-
     conn = db_con.connect()
     cur = conn.cursor()
 
     try:
         cur.execute(
-            "INSERT INTO cars_maintenance (Last_service_date, service_due_date, registration_expiration_date, accident_history, comments) VALUES (%s,%s,%s,%s,%s) RETURNING car_id;",
-            (Last_service_date, service_due_date, registration_expiration_date, accident_history, comments)
+            "INSERT INTO cars_maintenance (car_id, last_service_date, service_due_date, registration_expiration_date, accident_history, comments) VALUES (%s, %s,%s,%s,%s,%s);",
+            (car_id, last_service_date, service_due_date, registration_expiration_date, accident_history, comments)
         )
         conn.commit()
-        cars_maintenance_id = cur.fetchall()
     except Exception as e:
         conn.rollback()
-        return jsonify({'error': 'Database error', 'details': str(e)}), 500
+        return jsonify({'error': 'Database error', 'details': str(e)})
     finally:
         cur.close()
         conn.close()
 
-    return jsonify({'id': cars_maintenance_id, 'message': 'cars_maintenance created successfully'}), 201
+    return jsonify({'message': 'cars_maintenance created successfully'}), 201
 
 @cars_maintenance_bp.route('/api/cars_maintenance/<int:id>', methods=['GET'])
 def get_cars_maintenance_by_id(id):

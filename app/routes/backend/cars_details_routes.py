@@ -23,8 +23,8 @@ def get_cars_details_full():
     conn.close()
     return jsonify(cars_details)
 
-@cars_details_bp.route('/api/cars_details', methods=['POST'])
-def create_cars_details():
+@cars_details_bp.route('/api/cars_details/<int:car_id>', methods=['POST'])
+def create_cars_details(car_id):
     if request.content_type == 'application/json':
         data = request.get_json()
     elif request.content_type == 'application/x-www-form-urlencoded':
@@ -32,49 +32,21 @@ def create_cars_details():
     else:
         return jsonify({'error': 'Unsupported content type'}), 415
 
-    car_id = data.get('car_id')
-    if not car_id:
-        return jsonify({'error': 'Car id is required'}), 400
     
     transmission = data.get('transmission')
-    if not transmission:
-        return jsonify({'error': 'Transmission is required'}), 400
-    
-    fuel_type = data.get('car_id')
-    if not fuel_type:
-        return jsonify({'error': 'Fuel type is required'}), 400
-    
+    fuel_type = data.get('fuel_type')
     engine_size = data.get('engine_size')
-    if not engine_size:
-        return jsonify({'error':'Engine size is required'})
-
     horsepower = data.get('horsepower')
-    if not horsepower:
-        return jsonify({'error':'Horsepower required'})
-    
     mileage = data.get('mileage')
-    if not mileage:
-        return jsonify({'error': 'Mileage is required'}), 400
-    
     seating_capacity = data.get('seating_capacity')
-    if not seating_capacity:
-        return jsonify({'error': 'Seating Capacity is required'}), 400
-    
     color = data.get('color')
-    if not color:
-        return jsonify({'error': 'Color is required'}), 400
-    
     options = data.get('options')
-    if not color:
-        return jsonify({'error': 'Options is required'}), 400
-
     conn = db_con.connect()
     cur = conn.cursor()
-
     try:
         cur.execute(
-            "INSERT INTO cars_details (transmission, fuel_type, engine_size, horsepower, mileage, seating_capacity, color, options) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) RETURNING car_id;",
-            (transmission,fuel_type,engine_size,horsepower, mileage, seating_capacity, color, options )
+            "INSERT INTO cars_details (car_id,transmission, fuel_type, engine_size, horsepower, mileage, seating_capacity, color, options) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING car_id;",
+            (car_id,transmission,fuel_type,engine_size,horsepower, mileage, seating_capacity, color, options )
         )
         conn.commit()
         car_id = cur.fetchone()

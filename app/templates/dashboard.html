@@ -91,7 +91,7 @@
             </table>
         </div>
     </div>
-    
+
     <dialog class="form-dialog" id="add_new_car">
         <h2 class="title">New Car</h2>
         <div class="dialog-form-column">
@@ -108,6 +108,20 @@
                 <select class="input" id="brand-select" name="brand_id" required>
                     <option value="" selected>Select</option>
                 </select>
+                <script>
+                    fetch('/api/brands')
+                        .then(response => response.json())
+                        .then(data => {
+                            const brandSelect = document.getElementById('brand-select');
+                            data.forEach(brand => {
+                                const option = document.createElement('option');
+                                option.value = brand[0];
+                                option.textContent = brand[1];
+                                brandSelect.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching cars:', error));
+                </script>
             </div>
             <div class="group">
                 <input type="text" id="model" name="model" class="input" required>
@@ -126,51 +140,60 @@
                 <label class="form-label">Insurance Price Per Day*</label>
             </div>
             <div class="group">
-                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <select class="input" id="transmission" name="transmission">
+                    <option value="" selected>Select</option>
+                    <option value="Automatic">Automatic</option>
+                    <option value="Manual">Manual</option>
+                </select>
                 <label class="form-label">Transmission*</label>
             </div>
             <div class="group">
-                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <input type="text" id="fuel_type" name="fuel_type" class="input" required>
                 <label class="form-label">Fuel Type*</label>
             </div>
             <div class="group">
-                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <input type="text" id="engine_size" name="engine_size" class="input" required>
                 <label class="form-label">Engine Size*</label>
             </div>
             <div class="group">
-                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <input type="text" id="horsepower" name="horsepower" class="input" required>
                 <label class="form-label">HorsePower*</label>
             </div>
             <div class="group">
-                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <input type="text" id="mileage" name="mileage" class="input" required>
                 <label class="form-label">Mileage*</label>
             </div>
             <div class="group">
-                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <input type="text" id="seating_capacity" name="seating_capacity" class="input" required>
                 <label class="form-label">Seating Capacity*</label>
             </div>
             <div class="group">
-                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <input type="text" id="color" name="color" class="input" required>
                 <label class="form-label">Color*</label>
             </div>
             <div class="group">
-                <input type="text" id="insurance_price" name="insurance_price" class="input" required>
+                <input type="text" id="options" name="options" class="input" required>
                 <label class="form-label">Options*</label>
             </div>
             <div class="group">
-                <input type="date" id="purchase_date" name="purchase_date" class="input" required>
+                <input type="date" id="last_service_date" name="last_service_date" class="input" required>
                 <label class="form-label">Last Service Date*</label>
             </div>
             <div class="group">
-                <input type="date" id="purchase_date" name="purchase_date" class="input" required>
+                <input type="date" id="service_due_date" name="service_due_date" class="input" required>
                 <label class="form-label">Next Service Date*</label>
             </div>
             <div class="group">
-                <input type="date" id="purchase_date" name="purchase_date" class="input" required>
+                <input type="date" id="registration_expiration_date" name="registration_expiration_date" class="input"
+                    required>
                 <label class="form-label">Registration Expiry Date*</label>
             </div>
             <div class="group">
-                <select class="input" id="" name="" required>
+                <input type="file" id="images" name="images" class="input" required multiple>
+                <label class="form-label">Upload Images*</label>
+            </div>
+            <div class="group">
+                <select class="input" id="accident_history" name="accident_history" required>
                     <option value="" selected></option>
                     <option value="True">Yes</option>
                     <option value="False">No</option>
@@ -182,7 +205,6 @@
                 <button type="button" class="button submit" onclick="submitCarDialog()">Add</button>
             </div>
         </div>
-
     </dialog>
     <dialog class="form-dialog" id="add_new_booking">
         <h2 class="title">New Booking</h2>
@@ -253,20 +275,20 @@
                 <label class="form-label">Car*</label>
             </div>
             <div class="group">
-                <input required="" type="date" id="registration_expiration_date" name="registration_expiration_date"
+                <input required="" type="date" id="registration_expiration_date_u" name="registration_expiration_date_u"
                     class="input">
                 <label class="form-label">Registration Expiry Date*</label>
             </div>
             <div class="group">
-                <input required="" type="date" id="last_service_date" name="last_service_date" class="input">
+                <input required="" type="date" id="last_service_date_u" name="last_service_date_u" class="input">
                 <label class="form-label">Last Service Date*</label>
             </div>
             <div class="group">
-                <input required="" type="date" id="service_due_date" name="service_due_date" class="input">
+                <input required="" type="date" id="service_due_date_u" name="service_due_date_u" class="input">
                 <label class="form-label">Next Service Date*</label>
             </div>
             <div class="group">
-                <select class="input" id="accidents_history" name="accidents_history" required>
+                <select class="input" id="accidents_history_u" name="accidents_history_u" required>
                     <option value="True">Yes</option>
                     <option value="False">No</option>
                 </select>
@@ -298,11 +320,9 @@
             document.getElementById('update_maintenance').close();
         }
         function updateMaintenance(id) {
-            // Show the dialog
             const dialog = document.getElementById('update_maintenance');
             dialog.showModal();
 
-            // Fetch data from the API
             fetch(`/api/cars_maintenance/${id}`)
                 .then(response => {
                     if (!response.ok) {
@@ -312,15 +332,15 @@
                 })
                 .then(data => {
                     data.forEach(registration => {
-                    document.getElementById('car_id').value = registration[0];
-                    document.getElementById('car_name').value = registration[1];
+                        document.getElementById('car_id').value = registration[0];
+                        document.getElementById('car_name').value = registration[1];
 
-                    document.getElementById('registration_expiration_date').value = formatDate(registration[2]);
-                    document.getElementById('last_service_date').value = formatDate(registration[3]);
-                    document.getElementById('service_due_date').value = formatDate(registration[4]);
+                        document.getElementById('registration_expiration_date_u').value = formatDate(registration[2]);
+                        document.getElementById('last_service_date_u').value = formatDate(registration[3]);
+                        document.getElementById('service_due_date_u').value = formatDate(registration[4]);
 
-                    document.getElementById('accidents_history').value = registration[5] ? "True" : "False";
-                });
+                        document.getElementById('accidents_history_u').value = registration[5] ? "True" : "False";
+                    });
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
@@ -549,32 +569,32 @@
             }
         }
 
-    async function submitMaintenanceDialog() {
-        const carId = document.getElementById('car_id').value;
-        const registrationExpirationDate = document.getElementById('registration_expiration_date').value;
-        const lastServiceDate = document.getElementById('last_service_date').value;
-        const serviceDueDate = document.getElementById('service_due_date').value;
-        const accidentHistory = document.getElementById('accidents_history').value;
+        async function submitMaintenanceDialog() {
+            const carId = document.getElementById('car_id').value;
+            const registrationExpirationDate = document.getElementById('registration_expiration_date_u').value;
+            const lastServiceDate = document.getElementById('last_service_date_u').value;
+            const serviceDueDate = document.getElementById('service_due_date_u').value;
+            const accidentHistory = document.getElementById('accidents_history_u').value;
 
-        const comments = "No additional comments";
+            const comments = "No additional comments";
 
-        if (!carId || !registrationExpirationDate || !lastServiceDate || !serviceDueDate || !accidentHistory) {
+            if (!carId || !registrationExpirationDate || !lastServiceDate || !serviceDueDate || !accidentHistory) {
             alert('Please fill in all required fields.');
             return;
-        }
+            }
 
-        try {
+            try {
             const response = await fetch(`/api/cars_maintenance/${carId}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    registration_expiration_date: registrationExpirationDate,
-                    last_service_date: lastServiceDate,
-                    service_due_date: serviceDueDate,
-                    accident_history: accidentHistory,
-                    comments: comments
+                registration_expiration_date: registrationExpirationDate,
+                last_service_date: lastServiceDate,
+                service_due_date: serviceDueDate,
+                accident_history: accidentHistory,
+                comments: comments
                 })
             });
 
@@ -586,12 +606,132 @@
 
             const result = await response.json();
             alert(result.message);
+            document.getElementById('car_id').value = "";
+            document.getElementById('registration_expiration_date_u').value = "";
+            document.getElementById('last_service_date_u').value = "";
+            document.getElementById('service_due_date_u').value = "";
+            document.getElementById('accidents_history_u').value = "";
             location.reload();
-        } catch (error) {
+            } catch (error) {
             console.error('Error updating maintenance record:', error);
             alert('An error occurred. Please try again later.');
+            }
         }
-    }
+
+        async function submitCarDialog() {
+            alert("Submitting car data...");
+
+            const dialog = document.getElementById("add_new_car");
+
+            const carData = {
+            vin_number: dialog.querySelector("#vin_number").value,
+            purchase_date: dialog.querySelector("#purchase_date").value,
+            brand_id: dialog.querySelector("#brand-select").value,
+            model: dialog.querySelector("#model").value,
+            make: dialog.querySelector("#make").value,
+            rental_price: dialog.querySelector("#rental_price").value,
+            insurance_price: dialog.querySelector("#insurance_price").value,
+            };
+
+            try {
+            const carResponse = await fetch('/api/cars', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(carData),
+            });
+
+            if (!carResponse.ok) {
+                throw new Error(`Error creating car: ${await carResponse.text()}`);
+            }
+
+            const carResult = await carResponse.json();
+            const carId = carResult.id;
+
+            const carDetailsData = {
+                transmission: dialog.querySelector("#transmission").value,
+                fuel_type: dialog.querySelector("#fuel_type").value,
+                engine_size: dialog.querySelector("#engine_size").value,
+                horsepower: dialog.querySelector("#horsepower").value,
+                mileage: dialog.querySelector("#mileage").value,
+                seating_capacity: dialog.querySelector("#seating_capacity").value,
+                color: dialog.querySelector("#color").value,
+                options: dialog.querySelector("#options").value,
+            };
+
+            const carDetailsResponse = await fetch(`/api/cars_details/${carId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(carDetailsData),
+            });
+
+            if (!carDetailsResponse.ok) {
+                throw new Error(`Error creating car details: ${await carDetailsResponse.text()}`);
+            }
+
+            const maintenanceData = {
+                last_service_date: dialog.querySelector("#last_service_date").value,
+                service_due_date: dialog.querySelector("#service_due_date").value,
+                registration_expiration_date: dialog.querySelector("#registration_expiration_date").value,
+                accident_history: dialog.querySelector("#accident_history").value,
+                comments: "No additional comments",
+            };
+
+            const maintenanceResponse = await fetch(`/api/cars_maintenance/${carId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(maintenanceData),
+            });
+
+            if (!maintenanceResponse.ok) {
+                throw new Error(`Error creating maintenance data: ${await maintenanceResponse.text()}`);
+            }
+
+            const images = dialog.querySelector("#images").files;
+            const imagesFormData = new FormData();
+            Array.from(images).forEach(image => imagesFormData.append("images", image));
+
+            const imagesResponse = await fetch(`/api/cars_images/${carId}`, {
+                method: 'POST',
+                body: imagesFormData,
+            });
+
+            if (!imagesResponse.ok) {
+                throw new Error(`Error uploading images: ${await imagesResponse.text()}`);
+            }
+
+            const imagesResult = await imagesResponse.json();
+
+            alert("Car successfully created with ID: " + carId);
+            console.log("Uploaded Images:", imagesResult.uploaded_images);
+
+            dialog.querySelector("#vin_number").value = "";
+            dialog.querySelector("#purchase_date").value = "";
+            dialog.querySelector("#brand-select").value = "";
+            dialog.querySelector("#model").value = "";
+            dialog.querySelector("#make").value = "";
+            dialog.querySelector("#rental_price").value = "";
+            dialog.querySelector("#insurance_price").value = "";
+            dialog.querySelector("#transmission").value = "";
+            dialog.querySelector("#fuel_type").value = "";
+            dialog.querySelector("#engine_size").value = "";
+            dialog.querySelector("#horsepower").value = "";
+            dialog.querySelector("#mileage").value = "";
+            dialog.querySelector("#seating_capacity").value = "";
+            dialog.querySelector("#color").value = "";
+            dialog.querySelector("#options").value = "";
+            dialog.querySelector("#last_service_date").value = "";
+            dialog.querySelector("#service_due_date").value = "";
+            dialog.querySelector("#registration_expiration_date").value = "";
+            dialog.querySelector("#accident_history").value = "";
+            dialog.querySelector("#images").value = "";
+
+            location.reload();
+            } catch (error) {
+            console.error("Error submitting car:", error);
+            alert(`Submission failed: ${error.message}`);
+            }
+        }
+
 
     </script>
 </body>
