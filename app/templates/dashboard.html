@@ -178,13 +178,13 @@
     <div class="row">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Rented Cars</h2>
-                <button onclick="openBookingDialog()"><i class="material-icons">add</i>New Rental</button>
+                <h2 class="card-title">Bookings</h2>
+                <button onclick="openBookingDialog()"><i class="material-icons">add</i>New Booking</button>
             </div>
             <table id="rented-table" class="display" style="width:100%;">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Car</th>
                         <th>Position</th>
                         <th>Office</th>
                         <th>Age</th>
@@ -429,39 +429,43 @@
             const endDate = document.getElementById('end_date').value;
 
             if (!carId || !clientId || !startDate || !endDate) {
-                alert('Please fill in all required fields.');
-                return;
+            alert('Please fill in all required fields.');
+            return;
             }
             if (startDate >= endDate) {
-                alert('End date must be after start date.');
-                return;
+            alert('End date must be after start date.');
+            return;
             }
 
             const data = {
-                car_id: carId,
-                client_id: clientId,
-                start_date: startDate,
-                end_date: endDate,
+            car_id: carId,
+            client_id: clientId,
+            start_date: startDate,
+            end_date: endDate,
             };
 
             try {
-                const response = await fetch('/api/bookings', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
+            const response = await fetch('/api/bookings', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
 
-                if (response.ok) {
-                    alert('Booking added successfully!');
-                    closeBookingDialog();
-                } else {
-                    const error = await response.json();
-                    alert('Error: ' + (error.message || 'Failed to add booking.'));
-                }
+            if (response.ok) {
+                alert('Booking added successfully!');
+                document.getElementById('car-select').value = '';
+                document.getElementById('client-select').value = '';
+                document.getElementById('start_date').value = '';
+                document.getElementById('end_date').value = '';
+                closeBookingDialog();
+            } else {
+                const error = await response.json();
+                alert('Error: ' + (error.message || 'Failed to add booking.'));
+            }
             } catch (error) {
-                alert('Error: ' + error.message);
+            alert('Error: ' + error.message);
             }
         }
 

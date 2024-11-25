@@ -119,7 +119,7 @@ dialog::backdrop {
     outline: none;
 }
 
-label {
+.group label {
     font-family: poppins, sans-serif;
     color: #797777;
     font-size: 14px;
