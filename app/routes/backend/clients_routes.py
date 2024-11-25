@@ -25,7 +25,6 @@ def get_clients():
     clients = cur.fetchall()
     cur.close()
     conn.close()
-    print(clients)
     return jsonify(clients)
 
 @clients_bp.route('/api/clients', methods=['POST'])

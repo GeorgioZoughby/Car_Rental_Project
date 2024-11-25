@@ -1,5 +1,6 @@
 from .backend.admins_routes import admins_bp
 from .backend.bookings_routes import bookings_bp
+from .backend.bookingsV_routes import bookings_view_bp
 from .backend.brand_routes import brand_bp
 from .backend.category_routes import category_bp
 from .backend.cars_categories_routes import cars_categories_bp
@@ -10,6 +11,7 @@ from .backend.countries_routes import countries_bp
 from .backend.cars_maintenance_routes import cars_maintenance_bp
 from .backend.cars_image_routes import cars_images_bp
 from .backend.invoices_routes import invoices_bp
+from .backend.cars_view_routes import cars_view_bp
 from .html_routes import html_bp
 
 def init_blueprints(app):
@@ -26,4 +28,6 @@ def init_blueprints(app):
     app.register_blueprint(cars_maintenance_bp)
     app.register_blueprint(cars_images_bp)
     app.register_blueprint(invoices_bp)
+    app.register_blueprint(bookings_view_bp)
+    app.register_blueprint(cars_view_bp)
 

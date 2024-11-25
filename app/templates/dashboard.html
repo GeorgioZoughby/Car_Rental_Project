@@ -13,6 +13,114 @@
 <body>
     <div class="row">
         <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Bookings</h2>
+                <button onclick="openBookingDialog()"><i class="material-icons">add</i>New Booking</button>
+            </div>
+            <table id="rented-table" class="display" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Booking Date</th>
+                        <th>Car Model</th>
+                        <th>Full Name</th>
+                        <th>From</th>
+                        <th>To</th>
+                    </tr>
+                </thead>
+                <tbody style="text-wrap: nowrap;">
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Cars</h2>
+                <button onclick="openBookingDialog()"><i class="material-icons">add</i>New Car</button>
+            </div>
+            <table id="available_cars" class="display" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011-04-25</td>
+                        <td>$320,800</td>
+                    </tr>
+                    <tr>
+                        <td>Garrett Winters</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>63</td>
+                        <td>2011-07-25</td>
+                        <td>$170,750</td>
+                    </tr>
+                    <tr>
+                        <td>Ashton Cox</td>
+                        <td>Junior Technical Author</td>
+                        <td>San Francisco</td>
+                        <td>66</td>
+                        <td>2009-01-12</td>
+                        <td>$86,000</td>
+                    </tr>
+                    <tr>
+                        <td>Cedric Kelly</td>
+                        <td>Senior Javascript Developer</td>
+                        <td>Edinburgh</td>
+                        <td>22</td>
+                        <td>2012-03-29</td>
+                        <td>$433,060</td>
+                    </tr>
+                    <tr>
+                        <td>Airi Satou</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>33</td>
+                        <td>2008-11-28</td>
+                        <td>$162,700</td>
+                    </tr>
+                    <tr>
+                        <td>Brielle Williamson</td>
+                        <td>Integration Specialist</td>
+                        <td>New York</td>
+                        <td>61</td>
+                        <td>2012-12-02</td>
+                        <td>$372,000</td>
+                    </tr>
+                    <tr>
+                        <td>Herrod Chandler</td>
+                        <td>Sales Assistant</td>
+                        <td>San Francisco</td>
+                        <td>59</td>
+                        <td>2012-08-06</td>
+                        <td>$137,500</td>
+                    </tr>
+                    <tr>
+                        <td>Rhona Davidson</td>
+                        <td>Integration Specialist</td>
+                        <td>Tokyo</td>
+                        <td>55</td>
+                        <td>2010-10-14</td>
+                        <td>$327,900</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card">
             <h2 class="card-title">Registration Expiring Soon</h2>
             <table id="registration-table" class="display" style="width:100%;">
                 <thead>
@@ -175,176 +283,6 @@
             </table>
         </div>
     </div>
-    <div class="row">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">Bookings</h2>
-                <button onclick="openBookingDialog()"><i class="material-icons">add</i>New Booking</button>
-            </div>
-            <table id="rented-table" class="display" style="width:100%;">
-                <thead>
-                    <tr>
-                        <th>Car</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011-04-25</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011-07-25</td>
-                        <td>$170,750</td>
-                    </tr>
-                    <tr>
-                        <td>Ashton Cox</td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>66</td>
-                        <td>2009-01-12</td>
-                        <td>$86,000</td>
-                    </tr>
-                    <tr>
-                        <td>Cedric Kelly</td>
-                        <td>Senior Javascript Developer</td>
-                        <td>Edinburgh</td>
-                        <td>22</td>
-                        <td>2012-03-29</td>
-                        <td>$433,060</td>
-                    </tr>
-                    <tr>
-                        <td>Airi Satou</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>33</td>
-                        <td>2008-11-28</td>
-                        <td>$162,700</td>
-                    </tr>
-                    <tr>
-                        <td>Brielle Williamson</td>
-                        <td>Integration Specialist</td>
-                        <td>New York</td>
-                        <td>61</td>
-                        <td>2012-12-02</td>
-                        <td>$372,000</td>
-                    </tr>
-                    <tr>
-                        <td>Herrod Chandler</td>
-                        <td>Sales Assistant</td>
-                        <td>San Francisco</td>
-                        <td>59</td>
-                        <td>2012-08-06</td>
-                        <td>$137,500</td>
-                    </tr>
-                    <tr>
-                        <td>Rhona Davidson</td>
-                        <td>Integration Specialist</td>
-                        <td>Tokyo</td>
-                        <td>55</td>
-                        <td>2010-10-14</td>
-                        <td>$327,900</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">Available Cars</h2>
-                <button onclick="openCarDialog()"><i class="material-icons">add</i>New Car</button>
-            </div>
-            <table id="available-table" class="display" style="width:100%;">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011-04-25</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011-07-25</td>
-                        <td>$170,750</td>
-                    </tr>
-                    <tr>
-                        <td>Ashton Cox</td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>66</td>
-                        <td>2009-01-12</td>
-                        <td>$86,000</td>
-                    </tr>
-                    <tr>
-                        <td>Cedric Kelly</td>
-                        <td>Senior Javascript Developer</td>
-                        <td>Edinburgh</td>
-                        <td>22</td>
-                        <td>2012-03-29</td>
-                        <td>$433,060</td>
-                    </tr>
-                    <tr>
-                        <td>Airi Satou</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>33</td>
-                        <td>2008-11-28</td>
-                        <td>$162,700</td>
-                    </tr>
-                    <tr>
-                        <td>Brielle Williamson</td>
-                        <td>Integration Specialist</td>
-                        <td>New York</td>
-                        <td>61</td>
-                        <td>2012-12-02</td>
-                        <td>$372,000</td>
-                    </tr>
-                    <tr>
-                        <td>Herrod Chandler</td>
-                        <td>Sales Assistant</td>
-                        <td>San Francisco</td>
-                        <td>59</td>
-                        <td>2012-08-06</td>
-                        <td>$137,500</td>
-                    </tr>
-                    <tr>
-                        <td>Rhona Davidson</td>
-                        <td>Integration Specialist</td>
-                        <td>Tokyo</td>
-                        <td>55</td>
-                        <td>2010-10-14</td>
-                        <td>$327,900</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
     <dialog class="form-dialog" id="add_new_car">
         <h2 class="title">New Payment</h2>
         <div class="dialog-form-column">
@@ -407,6 +345,34 @@
                     <option value="" selected>Select</option>
                 </select>
             </div>
+            <script>
+                // Fetch data and populate car-select dropdown
+                fetch('/api/carsV')
+                    .then(response => response.json())
+                    .then(data => {
+                        const carSelect = document.getElementById('car-select');
+                        data.forEach(car => {
+                            const option = document.createElement('option');
+                            option.value = car[0];
+                            option.textContent = car[8] + ' ' + car[4] + ' ' + car[5];
+                            carSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching cars:', error));
+
+                fetch('/api/clients')
+                    .then(response => response.json())
+                    .then(data => {
+                        const clientSelect = document.getElementById('client-select');
+                        data.forEach(client => {
+                            const option = document.createElement('option');
+                            option.value = client[0];
+                            option.textContent = client[4] + ' ' + client[5] + ' ' + client[6];
+                            clientSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching clients:', error));
+            </script>
             <div class="group">
                 <input required="" type="date" id="start_date" name="start_date" class="input">
                 <label class="form-label">From*</label>
@@ -421,80 +387,8 @@
             </div>
         </div>
     </dialog>
-    <script>
-        async function submitBookingForm() {
-            const carId = document.getElementById('car-select').value;
-            const clientId = document.getElementById('client-select').value;
-            const startDate = document.getElementById('start_date').value;
-            const endDate = document.getElementById('end_date').value;
-
-            if (!carId || !clientId || !startDate || !endDate) {
-            alert('Please fill in all required fields.');
-            return;
-            }
-            if (startDate >= endDate) {
-            alert('End date must be after start date.');
-            return;
-            }
-
-            const data = {
-            car_id: carId,
-            client_id: clientId,
-            start_date: startDate,
-            end_date: endDate,
-            };
-
-            try {
-            const response = await fetch('/api/bookings', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            if (response.ok) {
-                alert('Booking added successfully!');
-                document.getElementById('car-select').value = '';
-                document.getElementById('client-select').value = '';
-                document.getElementById('start_date').value = '';
-                document.getElementById('end_date').value = '';
-                closeBookingDialog();
-            } else {
-                const error = await response.json();
-                alert('Error: ' + (error.message || 'Failed to add booking.'));
-            }
-            } catch (error) {
-            alert('Error: ' + error.message);
-            }
-        }
-
-        fetch('/api/cars')
-            .then(response => response.json())
-            .then(data => {
-                const carSelect = document.getElementById('car-select');
-                data.forEach(car => {
-                    const option = document.createElement('option');
-                    option.value = car[0];
-                    option.textContent = car[4];
-                    carSelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error fetching clients:', error));
-
-        fetch('/api/clients')
-            .then(response => response.json())
-            .then(data => {
-                const clientSelect = document.getElementById('client-select');
-                data.forEach(client => {
-                    const option = document.createElement('option');
-                    option.value = client[0];
-                    option.textContent = client[4] + ' ' + client[5] + ' ' + client[6];
-                    clientSelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error fetching clients:', error));
-    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script>
         function openCarDialog() {
             document.getElementById('add_new_car').showModal();
@@ -509,45 +403,196 @@
             document.getElementById('add_new_booking').close();
         }        
     </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script>
-        new DataTable("#registration-table", {
-            ordering: true,
-            paging: false,
-            info: false,
-            searching: true,
-            responsive: true,
-            scrollCollapse: false,
-            scrollY: '25vh',
+        // Initialize DataTables on page load
+        $(document).ready(function () {
+            // Initialize DataTables for all tables without data
+            const rentedTable = new DataTable("#rented-table", {
+                ordering: true,
+                paging: false,
+                info: false,
+                searching: true,
+                responsive: true,
+                scrollCollapse: false,
+                scrollY: '25vh',
+            });
+
+            const availableCarsTable = new DataTable("#available_cars", {
+                ordering: true,
+                paging: false,
+                info: false,
+                searching: true,
+                responsive: true,
+                scrollCollapse: false,
+                scrollY: '25vh',
+            });
+
+            const maintenanceTable = new DataTable("#maintenance-table", {
+                ordering: true,
+                paging: false,
+                info: false,
+                searching: true,
+                responsive: true,
+                scrollCollapse: false,
+                scrollY: '25vh',
+            });
+
+            const registrationTable = new DataTable("#registration-table", {
+                ordering: true,
+                paging: false,
+                info: false,
+                searching: true,
+                responsive: true,
+                scrollCollapse: false,
+                scrollY: '25vh',
+            });
+
+            fetch('/api/bookingsV')
+                .then(response => response.json())
+                .then(data => {
+                    const rentedTableBody = document.querySelector('#rented-table tbody');
+                    data.forEach(booking => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                    <td>${booking[0]}</td>
+                    <td>${new Date(booking[1]).toISOString().split('T')[0]}</td>
+                    <td>${booking[23] + ' ' + booking[19] + ' ' + booking[20]}</td>
+                    <td>${booking[8] + ' ' + booking[9] + ' ' + booking[10]}</td>
+                    <td>${new Date(booking[4]).toISOString().split('T')[0]}</td>
+                    <td>${new Date(booking[5]).toISOString().split('T')[0]}</td>
+                `;
+                        rentedTableBody.appendChild(row);
+                    });
+                    rentedTable.clear().draw();
+                    data.forEach(booking => {
+                        const formattedBooking = [
+                            booking[0],
+                            new Date(booking[1]).toISOString().split('T')[0],
+                            booking[23] + ' ' + booking[19] + ' ' + booking[20],
+                            booking[8] + ' ' + booking[9] + ' ' + booking[10],
+                            new Date(booking[4]).toISOString().split('T')[0],
+                            new Date(booking[5]).toISOString().split('T')[0]
+                        ];
+                        rentedTable.row.add(formattedBooking).draw(false);
+                    });
+                })
+                .catch(error => console.error('Error fetching bookings:', error));
+
+            // Fetch data and populate available_cars table
+            /*fetch('/api/cars')
+                .then(response => response.json())
+                .then(data => {
+                    const availableCarsTableBody = document.querySelector('#available_cars tbody');
+                    data.forEach(car => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                    <td>${car[0]}</td>
+                    <td>${car[1]}</td>
+                    <td>${car[2]}</td>
+                    <td>${car[3]}</td>
+                    <td>${car[4]}</td>
+                    <td>${car[5]}</td>
+                `;
+                        availableCarsTableBody.appendChild(row);
+                    });
+                    availableCarsTable.draw();  // Redraw the table after adding data
+                })
+                .catch(error => console.error('Error fetching cars:', error));*/
+
+            // Fetch data and populate maintenance-table
+            /*fetch('/api/maintenance')
+                .then(response => response.json())
+                .then(data => {
+                    const maintenanceTableBody = document.querySelector('#maintenance-table tbody');
+                    data.forEach(maintenance => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                    <td>${maintenance[0]}</td>
+                    <td>${maintenance[1]}</td>
+                    <td>${maintenance[2]}</td>
+                    <td>${maintenance[3]}</td>
+                    <td>${maintenance[4]}</td>
+                    <td>${maintenance[5]}</td>
+                `;
+                        maintenanceTableBody.appendChild(row);
+                    });
+                    maintenanceTable.draw();  // Redraw the table after adding data
+                })
+                .catch(error => console.error('Error fetching maintenance data:', error));*/
+
+            // Fetch data and populate registration-table
+            /*fetch('/api/registration')
+                .then(response => response.json())
+                .then(data => {
+                    const registrationTableBody = document.querySelector('#registration-table tbody');
+                    data.forEach(registration => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                    <td>${registration[0]}</td>
+                    <td>${registration[1]}</td>
+                    <td>${registration[2]}</td>
+                    <td>${registration[3]}</td>
+                    <td>${registration[4]}</td>
+                    <td>${registration[5]}</td>
+                `;
+                        registrationTableBody.appendChild(row);
+                    });
+                    registrationTable.draw();
+                })
+                .catch(error => console.error('Error fetching registration data:', error));*/
         });
-        new DataTable("#maintenance-table", {
-            ordering: true,
-            paging: false,
-            info: false,
-            searching: true,
-            responsive: true,
-            scrollCollapse: false,
-            scrollY: '25vh',
-        });
-        new DataTable("#rented-table", {
-            ordering: true,
-            paging: false,
-            info: false,
-            searching: true,
-            responsive: true,
-            scrollCollapse: false,
-            scrollY: '25vh',
-        });
-        new DataTable("#available-table", {
-            ordering: true,
-            paging: false,
-            info: false,
-            searching: true,
-            responsive: true,
-            scrollCollapse: false,
-            scrollY: '25vh',
-        });
+
+    </script>
+    <script>
+    async function submitBookingForm() {
+        const carId = document.getElementById('car-select').value;
+        const clientId = document.getElementById('client-select').value;
+        const startDate = document.getElementById('start_date').value;
+        const endDate = document.getElementById('end_date').value;
+
+        if (!carId || !clientId || !startDate || !endDate) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+        if (startDate >= endDate) {
+            alert('End date must be after start date.');
+            return;
+        }
+
+        const data = {
+            car_id: carId,
+            client_id: clientId,
+            start_date: startDate,
+            end_date: endDate,
+        };
+
+        try {
+            const response = await fetch('/api/bookings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                alert('Booking added successfully!');
+                document.getElementById('car-select').value = "";
+                document.getElementById('client-select').value = "";
+                document.getElementById('start_date').value = "";
+                document.getElementById('end_date').value = "";
+
+                closeBookingDialog();
+                location.reload(); 
+            } else {
+                const error = await response.json();
+                alert('Error: ' + (error.message || 'Failed to add booking.'));
+            }
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    }
+
     </script>
 </body>
 
